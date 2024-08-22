@@ -1,0 +1,35 @@
+
+.stepper-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full viewport height for centering */
+    padding: 20px;
+  
+    mat-horizontal-stepper {
+      width: 100%;
+      max-width: 600px; /* Max width for the stepper */
+      padding: 20px;
+      background-color: #f5f5f5; /* Light background for the stepper */
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    }
+  
+    mat-form-field {
+      width: 100%; /* Full width for form fields */
+      margin-bottom: 16px; /* Spacing between form fields */
+    }
+  
+    button {
+      margin: 8px; /* Spacing around buttons */
+    }
+  
+    .mat-step-header {
+      background-color: #e0e0e0; /* Step header background */
+    }
+  
+    .mat-step-label {
+      font-weight: bold;
+    }
+  }
+  
