@@ -1,70 +1,7 @@
-<!-- 
-<div class="stepper-container">
+
+ <div class="stepper-container">
   <mat-horizontal-stepper [linear]="true" #stepper>
-    <mat-step [stepControl]="firstFormGroup">
-      <form [formGroup]="firstFormGroup">
-        <ng-template matStepLabel>Step 1</ng-template>
-        <mat-form-field>
-          <mat-label>First Input</mat-label>
-          <input matInput formControlName="firstCtrl" placeholder="Enter value" />
-        </mat-form-field>
-        <div>
-          <button mat-button matStepperNext>Next</button>
-        </div>
-      </form>
-    </mat-step>
-
-    <mat-step [stepControl]="secondFormGroup">
-      <form [formGroup]="secondFormGroup">
-        <ng-template matStepLabel>Step 2</ng-template>
-        <mat-form-field>
-          <mat-label>Second Input</mat-label>
-          <input matInput formControlName="secondCtrl" placeholder="Enter value" />
-        </mat-form-field>
-        <div>
-          <button mat-button matStepperPrevious>Back</button>
-          <button mat-button matStepperNext>Next</button>
-        </div>
-      </form>
-    </mat-step>
-
-    <mat-step [stepControl]="thirdFormGroup">
-      <form [formGroup]="thirdFormGroup">
-        <ng-template matStepLabel>Step 3</ng-template>
-        <mat-form-field>
-          <mat-label>Third Input</mat-label>
-          <input matInput formControlName="thirdCtrl" placeholder="Enter value" />
-        </mat-form-field>
-        <div>
-          <button mat-button matStepperPrevious>Back</button>
-          <button mat-button matStepperNext>Next</button>
-        </div>
-      </form>
-    </mat-step>
-
-    <mat-step [stepControl]="fourthFormGroup">
-      <form [formGroup]="fourthFormGroup">
-        <ng-template matStepLabel>Step 4</ng-template>
-        <mat-form-field>
-          <mat-label>Fourth Input</mat-label>
-          <input matInput formControlName="fourthCtrl" placeholder="Enter value" />
-        </mat-form-field>
-        <div>
-          <button mat-button matStepperPrevious>Back</button>
-          <button mat-button (click)="onSubmit()">Submit</button>
-        </div>
-      </form>
-    </mat-step>
-  </mat-horizontal-stepper>
-</div>
- -->
-
-
-
- <!-- src/app/components/admin-dashboard/admin-dashboard.component.html -->
-<div class="stepper-container">
-  <mat-horizontal-stepper [linear]="true" #stepper>
-    <!-- Personal Details Step -->
+    <!--Step 1 -->
     <mat-step [stepControl]="personalDetailsFormGroup">
       <form [formGroup]="personalDetailsFormGroup">
         <ng-template matStepLabel>Personal Details</ng-template>
@@ -82,7 +19,7 @@
       </form>
     </mat-step>
 
-    <!-- Address Step -->
+    <!--Step 2-->
     <mat-step [stepControl]="addressFormGroup">
       <form [formGroup]="addressFormGroup">
         <ng-template matStepLabel>Address</ng-template>
@@ -109,7 +46,7 @@
       </form>
     </mat-step>
 
-    <!-- Education Step -->
+    <!--Step 3 -->
     <mat-step [stepControl]="educationFormGroup">
       <form [formGroup]="educationFormGroup">
         <ng-template matStepLabel>Education</ng-template>
@@ -127,12 +64,31 @@
         </mat-form-field>
         <div>
           <button mat-button matStepperPrevious>Back</button>
-          <button mat-button (click)="onSubmit()">Submit</button>
+          <button mat-button matStepperNext>Next</button>
         </div>
       </form>
     </mat-step>
 
-
-    
+    <!-- step 4 -->
+    <mat-step>
+      <ng-template matStepLabel>Review and Submit</ng-template>
+      <div class="review-section">
+        <h3>Review your details</h3>
+        <p><strong>First Name:</strong> {{ personalDetailsFormGroup.get('firstName')?.value }}</p>
+        <p><strong>Last Name:</strong> {{ personalDetailsFormGroup.get('lastName')?.value }}</p>
+        <p><strong>Street:</strong> {{ addressFormGroup.get('street')?.value }}</p>
+        <p><strong>City:</strong> {{ addressFormGroup.get('city')?.value }}</p>
+        <p><strong>State:</strong> {{ addressFormGroup.get('state')?.value }}</p>
+        <p><strong>Zip Code:</strong> {{ addressFormGroup.get('zipCode')?.value }}</p>
+        <p><strong>Degree:</strong> {{ educationFormGroup.get('degree')?.value }}</p>
+        <p><strong>University:</strong> {{ educationFormGroup.get('university')?.value }}</p>
+        <p><strong>Graduation Year:</strong> {{ educationFormGroup.get('graduationYear')?.value }}</p>
+      </div>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button (click)="onSubmit()">Submit</button>
+      </div>
+    </mat-step>
   </mat-horizontal-stepper>
 </div>
+

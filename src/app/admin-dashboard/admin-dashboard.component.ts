@@ -3,61 +3,68 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { MatStepper, MatStepperModule } from '@angular/material/stepper';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { FormSubmittedDialog } from '../form-submiited-dialouge/form-submiited-dialouge.component';
-import { MatDialog } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+
 
 
 @Component({
   selector: 'app-admin-dashboard',
   standalone: true,
-  imports: [MatStepperModule,
+  imports: [
+    MatStepperModule,
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    MatDialogModule
-    
+    MatDialogModule,
+    MatSnackBarModule
   ],
   templateUrl: './admin-dashboard.component.html',
   styleUrl: './admin-dashboard.component.scss'
 })
 export class AdminDashboardComponent {
-  personalDetailsFormGroup: FormGroup | any;
-  addressFormGroup: FormGroup | any;
-  educationFormGroup: FormGroup | any;
+  personalDetailsFormGroup: FormGroup;
+  addressFormGroup: FormGroup;
+  educationFormGroup: FormGroup;
 
-  constructor(private _formBuilder: FormBuilder, public dialog: MatDialog) {}
-
-  ngOnInit() {
-    this.personalDetailsFormGroup = this._formBuilder.group({
+  constructor(private fb: FormBuilder, private _snackBar: MatSnackBar) {
+    this.personalDetailsFormGroup = this.fb.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required]
     });
-    this.addressFormGroup = this._formBuilder.group({
+
+    this.addressFormGroup = this.fb.group({
       street: ['', Validators.required],
       city: ['', Validators.required],
       state: ['', Validators.required],
       zipCode: ['', Validators.required]
     });
-    this.educationFormGroup = this._formBuilder.group({
+
+    this.educationFormGroup = this.fb.group({
       degree: ['', Validators.required],
       university: ['', Validators.required],
-      graduationYear: ['', Validators.required]
+      graduationYear: ['', [
+        Validators.required,
+        Validators.min(1900),
+        Validators.max(new Date().getFullYear())
+      ]]
     });
   }
 
   onSubmit() {
-    if (this.personalDetailsFormGroup.valid && this.addressFormGroup.valid && this.educationFormGroup.valid) {
-      this.openDialog();
+    if (
+      this.personalDetailsFormGroup.valid &&
+      this.addressFormGroup.valid &&
+      this.educationFormGroup.valid
+    ) {
+      this._snackBar.open('Form Submitted Successfully!', 'Close', {
+        duration: 3000,
+      });
+      this.personalDetailsFormGroup.reset();
+      this.addressFormGroup.reset();
+      this.educationFormGroup.reset();
     }
-  }
-
-  openDialog() {
-    this.dialog.open(FormSubmittedDialog, {
-      width: '250px',
-      data: { message: 'Form Submitted Successfully!' }
-    });
   }
 }

@@ -43,6 +43,10 @@ export class PayrollComponent {
       this.payrollData = data;
     });
   }
+  
+  onDelete(id: number) {
+    this.payrollService.deletePayrollRecord(id);
+  }
 
   onSubmit() {
     if (this.payrollForm.valid) {
@@ -55,9 +59,6 @@ export class PayrollComponent {
     }
   }
 
-  onDelete(id: number) {
-    this.payrollService.deletePayrollRecord(id);
-  }
 
 
 }

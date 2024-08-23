@@ -36,8 +36,6 @@ export class LoginComponent {
   onSubmit() {
     if (this.loginForm.valid) {
       const { email, password } = this.loginForm.value;
-
-      // Login and determine the user role
       if (this.authService.login(email, password)) {
         const role = this.authService.getRole();
         if (role === UserRole.Admin) {

@@ -11,12 +11,11 @@ export class AuthService {
   constructor() {}
 
   login(email: string, password: string): boolean {
-    // Dummy login logic, replace with real API call
-    if (email === 'admin@example.com' && password === 'password') {
+    if (email === 'admin@gmail.com' && password === 'admin123') {
       this.userRole = UserRole.Admin;
-    } else if (email === 'superuser@example.com' && password === 'password') {
+    } else if (email === 'superuser@gmail.com' && password === 'super123') {
       this.userRole = UserRole.SuperUser;
-    } else if (email === 'user@example.com' && password === 'password') {
+    } else if (email === 'user@gmail.com' && password === 'user123') {
       this.userRole = UserRole.User;
     } else {
       return false;
